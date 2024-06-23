@@ -38,7 +38,17 @@ while True:
     img_gray = cv2.resize(img_gray, (200, 200))
     cv2.imshow("cropped", img_gray)
 
+    result, probabilty = prediction(img_gray, model)
+    cv2.putText(frame_copy, f"Prediction : {result}", (40, 50), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255, 0, 255), 2,
+                cv2.LINE_AA)
+    cv2.putText(frame_copy, f"Probability : " + "{:.2f}".format(probabilty), (40, 80), cv2.FONT_HERSHEY_SIMPLEX, 0.8,
+                (255, 0, 255), 2, cv2.LINE_AA)
 
+    if probabilty > 0.75:
+        color = (0, 255, 0)
+    else:
+        color = (0, 0, 255)
+    cv2.rectangle(frame_copy, bbox[0], bbox[1], color, 3)
 
     cv2.imshow("input", frame_copy)
 
