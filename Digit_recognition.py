@@ -26,7 +26,6 @@ def prediction(image, model):
 while True:
 
     _, frame = cap.read()
-    frame = cv2.rotate(frame, cv2.ROTATE_180)
     frame_copy = frame.copy()
 
     bbox_size = (60, 60)
